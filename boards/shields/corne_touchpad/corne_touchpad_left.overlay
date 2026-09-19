@@ -1,0 +1,37 @@
+/*
+ * Moitié gauche = centrale : le pad est lu localement, et le pad de droite
+ * arrive via l'input split.
+ *
+ * Câblage : SDA/SCL sur le connecteur OLED (pro_micro 2/3),
+ *           RDY -> TX (pro_micro 1), RST -> RX (pro_micro 0).
+ */
+
+#include "corne_touchpad.dtsi"
+
+&pro_micro_i2c {
+    status = "okay";
+
+    trackpad_left: iqs5xx@74 {
+        compatible = "azoteq,iqs5xx";
+        reg = <0x74>;
+        status = "okay";
+        rdy-gpios = <&pro_micro 1 GPIO_ACTIVE_HIGH>;
+        reset-gpios = <&pro_micro 0 GPIO_ACTIVE_LOW>;
+
+        one-finger-tap;
+        two-finger-tap;
+        press-and-hold;
+        scroll;
+        natural-scroll-y;
+        natural-scroll-x;
+    };
+};
+
+&trackpad_left_listener {
+    status = "okay";
+    device = <&trackpad_left>;
+};
+
+&trackpad_right_listener {
+    status = "okay";
+};

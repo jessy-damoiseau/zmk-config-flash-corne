@@ -1,0 +1,27 @@
+/*
+ * Éléments partagés par les deux moitiés : le pad droit (périphérique) est
+ * relayé vers la moitié gauche (centrale) via un zmk,input-split.
+ */
+
+/ {
+    split_inputs {
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        trackpad_right_split: trackpad_right_split@0 {
+            compatible = "zmk,input-split";
+            reg = <0>;
+        };
+    };
+
+    trackpad_left_listener: trackpad_left_listener {
+        compatible = "zmk,input-listener";
+        status = "disabled";
+    };
+
+    trackpad_right_listener: trackpad_right_listener {
+        compatible = "zmk,input-listener";
+        status = "disabled";
+        device = <&trackpad_right_split>;
+    };
+};

@@ -1,0 +1,9 @@
+if SHIELD_CORNE_TOUCHPAD_LEFT || SHIELD_CORNE_TOUCHPAD_RIGHT
+
+config ZMK_POINTING
+    default y
+
+config I2C
+    default y
+
+endif
