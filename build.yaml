@@ -20,6 +20,6 @@
 ---
 include:
   - board: nice_nano_v2
-    shield: corne_left corne_touchpad_left
+    shield: corne_left
   - board: nice_nano_v2
-    shield: corne_right corne_touchpad_right
+    shield: corne_right

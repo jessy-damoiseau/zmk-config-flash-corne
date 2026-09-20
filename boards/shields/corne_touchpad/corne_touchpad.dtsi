@@ -3,6 +3,17 @@
  * relayé vers la moitié gauche (centrale) via un zmk,input-split.
  */
 
+/*
+ * Pull-ups internes sur SDA/SCL : ce sont normalement ceux du module OLED
+ * qui polarisent le bus. Sans OLED (ou si le TPS43 n'en a pas), l'I2C reste
+ * muet. Les pull-ups internes (~13 kΩ) suffisent pour des fils courts.
+ */
+&i2c0_default {
+    group1 {
+        bias-pull-up;
+    };
+};
+
 / {
     split_inputs {
         #address-cells = <1>;
@@ -11,7 +22,7 @@
         trackpad_right_split: trackpad_right_split@0 {
             compatible = "zmk,input-split";
             reg = <0>;
-        };
+        };  
     };
 
     trackpad_left_listener: trackpad_left_listener {
